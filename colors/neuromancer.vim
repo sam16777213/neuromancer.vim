@@ -12,7 +12,7 @@ let s:colors = {
     \ "turquoise": "#65F2F2",
     \ "dark_purple": "#121424",
     \ "light_purple": "#A2A0DF",
-    \ "dark_gray": "#7E7E7E",
+    \ "dark_gray": "#333333",
     \ "orange": "#FDA549",
     \ "red": "#ff586b",
     \ "hot_pink": "#E9729F",
@@ -20,28 +20,42 @@ let s:colors = {
     \ "white": "#F7F9F9",
     \ "green": "#37CFC4",
     \ "yellow": "#F4DE68",
+    \ "gray": "#999999",
+    \ "lime_green":"#32A834"
 \ }
 
 function! Hi(name, guifg, guibg, gui)
-    let l:cmd = "hi " . a:name . " guibg=" . a:guibg . " guifg=" . a:guifg . " gui=" . a:gui
+    let l:cmd = "hi! " . a:name . " guibg=" . a:guibg . " guifg=" . a:guifg . " gui=" . a:gui . " cterm=" . a:gui
     exe l:cmd
 endfunc
+function! HiNoFg(name,guibg,gui)
+    let l:cmd="hi! " . a:name . " guibg=" . a:guibg . " gui=" . a:gui . " cterm=" . a:gui
+    exe l:cmd
+endfunc
+
 
 call Hi("Normal", s:colors["white"], s:colors["dark_purple"], "NONE")
 call Hi("ColorColumn", "NONE", s:colors["hot_pink"],"NONE")
 call Hi("LineNr", s:colors["white"], "NONE", "NONE")
 call Hi("CursorLineNr", s:colors["white"], "NONE", "NONE")
 call Hi("Conditional", s:colors["light_purple"], "NONE", "NONE")
-call Hi("Function", s:colors["hot_pink"], "NONE", "NONE")
+call Hi("Function", s:colors["turquoise"], "NONE", "NONE")
 call Hi("Constant", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("Statement", s:colors["dark_blue"], "NONE", "NONE")
-call Hi("Comment", s:colors["dark_gray"], "NONE", "NONE")
+call Hi("Search", s:colors["black"], s:colors["lime_green"],"NONE")
+call Hi("Comment", s:colors["gray"], "NONE", "NONE")
 call Hi("PreProc", s:colors["orange"], "NONE", "NONE")
-call Hi("String", s:colors["yellow"], "NONE", "NONE")
+call Hi("String", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("Number", s:colors["light_purple"], "NONE", "NONE")
 call Hi("Float", s:colors["dark_purple"], "NONE", "NONE")
 call Hi("Repeat", s:colors["red"], "NONE", "NONE")
-call Hi("Operator", s:colors["red"], "NONE", "NONE")
+call Hi("Operator", s:colors["orange"], "NONE", "bold")
+call Hi("Type", s:colors["yellow"], "NONE", "NONE")
+call Hi("PMenu", s:colors["white"], s:colors["dark_gray"], "NONE")
+call Hi("PMenuSel", s:colors["hot_pink"], s:colors["dark_purple"], "NONE")
+call Hi("TabLine",s:colors["white"],s:colors["dark_purple"],"NONE")
+call Hi("TabLineSel",s:colors["hot_pink"],s:colors["black"],"NONE")
+call Hi("TabLineFill",s:colors["white"],s:colors["dark_purple"],"NONE")
 
 call Hi("sqlType", s:colors["yellow"], "NONE", "NONE")
 call Hi("sqlKeyword", s:colors["light_purple"], "NONE", "NONE")
@@ -74,7 +88,7 @@ call Hi("htmlArg", s:colors["hot_pink"], "NONE", "NONE")
 
 call Hi("pythonImport", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("pythonRepeat", s:colors["light_purple"], "NONE", "NONE")
-call Hi("pythonOperator", s:colors["light_purple"], "NONE", "NONE")
+call Hi("pythonOperator", s:colors["light_purple"], "NONE", "bold")
 call Hi("pythonException", s:colors["light_purple"], "NONE", "NONE")
 call Hi("pythonExClass", s:colors["orange"], "NONE", "NONE")
 call Hi("pythonStrFormat", s:colors["dark_blue"], "NONE", "NONE")
@@ -83,7 +97,7 @@ call Hi("pythonConditional", s:colors["light_purple"], "NONE", "NONE")
 call Hi("pythonBoolean", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("pythonBuiltinObj", s:colors["green"], "NONE", "NONE")
 call Hi("pythonRun", "#575758", "NONE", "NONE")
-
+call Hi("pythonDottedName",s:colors["red"],"NONE","NONE")
 """"""""""""""""""""""""""""""
 "   Vim specific settings    "
 "                            "
@@ -103,7 +117,8 @@ call Hi("vimHiGuiRgb", s:colors["yellow"], "NONE", "NONE")
 call Hi("vimSynType", s:colors["yellow"], "NONE", "NONE")
 call Hi("vimHiClear", s:colors["yellow"], "NONE", "NONE")
 call Hi("vimNotation", s:colors["yellow"], "NONE", "NONE")
-call Hi("vimBracket", s:colors["yellow"], "NONE", "NONE")
+call Hi("vimBracket", s:colors["yellow"], "NONE", "bold")
+call Hi("vimSetEqual", s:colors["yellow"], "NONE", "bold")
 call Hi("vimOperParen", s:colors["white"], "NONE", "NONE")
 call Hi("vimHiKeyList", s:colors["white"], "NONE", "NONE")
 call Hi("vimHiGuiFgBg", s:colors["white"], "NONE", "NONE")
@@ -161,7 +176,7 @@ call Hi("javascriptTry", s:colors["light_purple"], "NONE", "NONE")
 call Hi("javascriptExceptions", s:colors["light_purple"], "NONE", "NONE")
 call Hi("javascriptImport", s:colors["dark_blue"], "NONE", "NONE")
 call Hi("javascriptExport", s:colors["dark_blue"], "NONE", "NONE")
-call Hi("javascriptOperator", s:colors["dark_blue"], "NONE", "NONE")
+call Hi("javascriptOperator", s:colors["dark_blue"], "NONE", "bold")
 call Hi("javascriptBOMWindowProp", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("javascriptBOMWindowMethod", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("javascriptNodeGlobal", s:colors["hot_pink"], "NONE", "NONE")
@@ -185,7 +200,7 @@ call Hi("javascriptPrototype", s:colors["yellow"], "NONE", "NONE")
 call Hi("javascriptFuncExp", s:colors["dark_blue"], "NONE", "NONE")
 call Hi("javascriptReserved", s:colors["dark_blue"], "NONE", "NONE")
 call Hi("javascriptAjaxProperties", s:colors["dark_blue"], "NONE", "NONE")
-call Hi("javascriptOperator", s:colors["dark_blue"], "NONE", "NONE")
+call Hi("javascriptOperator", s:colors["dark_blue"], "NONE", "bold")
 call Hi("javascriptGlobalMethod", s:colors["light_purple"], "NONE", "NONE")
 call Hi("javascriptIdentifier", s:colors["light_purple"], "NONE", "NONE")
 call Hi("javascriptMessage", s:colors["white"], "NONE", "NONE")
@@ -281,7 +296,7 @@ call Hi("typescriptExceptions", s:colors["red"], "NONE", "NONE")
 call Hi("typescriptIdentifier", s:colors["light_purple"], "NONE", "NONE")
 call Hi("typescriptType", s:colors["green"], "NONE", "NONE")
 call Hi("typescriptNull", s:colors["green"], "NONE", "NONE")
-call Hi("typescriptOperator", s:colors["hot_pink"], "NONE", "NONE")
+call Hi("typescriptOperator", s:colors["hot_pink"], "NONE", "bold")
 call Hi("typescriptNumber", s:colors["green"], "NONE", "NONE")
 call Hi("typescriptStatement", s:colors["light_purple"], "NONE", "NONE")
 call Hi("typescriptLabel", s:colors["hot_pink"], "NONE", "NONE")
@@ -309,9 +324,9 @@ call Hi("goFloat", s:colors["light_purple"], "NONE", "NONE")
 call Hi("goTypeName", s:colors["hot_pink"], "NONE", "NONE")
 call Hi("goFunction", s:colors["light_purple"], "NONE", "NONE")
 call Hi("goReceiverType", s:colors["green"], "NONE", "NONE")
-call Hi("goPointerOperator", s:colors["hot_pink"], "NONE", "NONE")
+call Hi("goPointerOperator", s:colors["hot_pink"], "NONE", "bold")
 call Hi("goMethodCall", s:colors["light_purple"], "NONE", "NONE")
-call Hi("goOperator", s:colors["hot_pink"], "NONE", "NONE")
+call Hi("goOperator", s:colors["hot_pink"], "NONE", "bold")
 call Hi("goField", s:colors["turquoise"], "NONE", "NONE")
 call Hi("goFunctionCall", s:colors["dark_blue"], "NONE", "NONE")
 
@@ -375,3 +390,5 @@ call Hi("yamlFlowMappingKey", s:colors["dark_blue"], "NONE", "NONE")
 
 call Hi("dosiniHeader", s:colors["dark_blue"], "NONE", "NONE")
 call Hi("dosiniLabel", s:colors["hot_pink"], "NONE", "NONE")
+call HiNoFg("CursorColumn",s:colors["dark_purple"],"NONE")
+call HiNoFg("CursorLine",s:colors["dark_purple"],"NONE")
